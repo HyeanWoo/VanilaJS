@@ -5,8 +5,6 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
-
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -14,7 +12,6 @@
         <div class="hand second-hand"></div>
       </div>
     </div>
-
 
   <style>
     html {
@@ -60,15 +57,48 @@
       width: 50%;
       height: 6px;
       background: black;
+      border-radius: 50%;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 
+    .minute-hand {
+      height: 8px;
+    }
+
+    .hour-hand {
+      height: 8px;
+      width: 30%;
+      right: 50%;  
+    }
   </style>
 
-  <script>
+<script>
+  const hourHand = document.querySelector('.hour-hand');
+  const minHand = document.querySelector('.min-hand');
+  const secondHand = document.querySelector('.second-hand');
 
+  function setDate() {
+    const date = new Date();
 
-  </script>
+    const hours = date.getHours();
+    const mins = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const hoursDegrees = hours * 30 + (mins/60)*30 + (seconds/60)*6 + 90;
+    const minsDegrees = mins * 6 + (seconds/60)*6 + 90;
+    const secondsDegrees = seconds * 6 + 90;
+
+    hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+    minHand.style.transform = `rotate(${minsDegrees}deg)`;
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+  }
+
+  setInterval(setDate, 1000);
+</script>
 </body>
 </html>
