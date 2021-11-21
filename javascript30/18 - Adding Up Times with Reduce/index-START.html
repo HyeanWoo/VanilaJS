@@ -182,6 +182,51 @@
     </li>
   </ul>
 <script>
+  // 내 풀이
+  // const timeNodes = document.querySelectorAll('[data-time]');
+  
+  // let [hour, min, sec] = [0, 0, 0];
+
+  // function addTime(time) {
+  //   const [tMin, tSec] = time.split(":").map(Number);
+  //   [min, sec] = [min + tMin, sec+ tSec];
+    
+  //   if (sec > 60) {
+  //     min += 1;
+  //     sec -= 60;
+  //   }
+
+  //   if (min > 60) {
+  //     hour += 1;
+  //     min -= 60;
+  //   }
+  // }
+
+  // timeNodes.forEach(node => {
+  //   addTime(node.dataset.time);
+  // })
+
+  // console.log(hour, min, sec);
+
+  // 강의 풀이
+  const timeNodes = Array.from(document.querySelectorAll("[data-time]"));
+  
+  const seconds = timeNodes
+    .map(node => node.dataset.time)
+    .map(timeCode => {
+      const [min, sec] = timeCode.split(":").map(parseFloat);
+      return min * 60 + sec;
+    })
+    .reduce((total, currentSec) => (total + currentSec), 0);
+
+  let secondsLeft = seconds;
+  const hour = Math.floor(secondsLeft / 3600);
+  secondsLeft %= 3600;
+
+  const min = Math.floor(secondsLeft / 60);
+  secondsLeft %= 60;
+
+  console.log(hour, min, secondsLeft);
 </script>
 </body>
 </html>
