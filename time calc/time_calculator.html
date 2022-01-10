@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #root {
+      width: 500px;
+      height: calc(100vh - 16px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .calc-wrapper {
+      width: 300px;
+      height: 200px;
+    }
+
+    .calc-wrapper > form > input {
+      width: 50px;
+    }
+
+    .total {
+      position: absolute;
+      bottom: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .calced-list {
+      width: 200px;
+      height: 300px;
+      margin-bottom: 150px;
+    }
+    
+    .calced-list > .list-wrapper {
+      overflow: auto;
+      height: inherit;
+      margin-left: 100px;
+      border: 1px dashed black;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="calc-wrapper">
+      <form id="playtime-form">
+        <label for="playtime-min">분 : </label>
+        <input
+          id="playtime-min"
+          type="number"
+          name="playtime-min"
+          autocomplete="off"
+          autofocus="on"
+          max="59"
+          min="0"
+        >
+        <label for="playtime-sec">초 : </label>
+        <input
+          id="playtime-sec"
+          type="number"
+          name="playtime-sec"
+          autocomplete="off"
+          max="59"
+          min="0"
+        >
+        <button type="submit">입력</button>
+      </form>
+    </div>
+    <div class="calced-list">
+      <div class="list-wrapper">
+        <ol id="video-list" type="1"></ol>
+      </div>
+    </div>
+  </div>
+  <div class="total">
+    <span>total time :</span>
+    <span id="total-time"></span>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
